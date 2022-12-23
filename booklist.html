@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <style>
+      /* Add some styling to the form elements */
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      input[type="text"] {
+        width: 300px;
+        height: 35px;
+        margin: 10px 0;
+        padding: 0 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+      }
+      input[type="submit"] {
+        width: 100px;
+        height: 35px;
+        margin: 10px 0;
+        font-size: 16px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      /* Add some styling to the book list */
+      .book-list {
+        width: 500px;
+        margin: 20px auto;
+        border: 1px solid #ccc;
+      }
+      .book-list th,
+      .book-list td {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      .book-list th {
+        text-align: left;
+        background-color: #eee;
+      }
+      .book-list tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Add Book</h1>
+    <form id="add-book-form">
+      <label for="book-title">Book Title:</label>
+      <input type="text" id="book-title" name="book-title">
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author">
+      <label for="isbn">ISBN:</label>
+      <input type="text" id="isbn" name="isbn">
+      <input type="submit" value="Submit">
+    </form>
+    <table class="book-list" id="book-list">
+      <tr>
+        <th>Book Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+      </tr>
+    </table>
+    <script>
+        // Add a submit event listener to the form
+        document.querySelector('#add-book-form').addEventListener('submit', e => {
+          // Prevent the form from submitting
+          e.preventDefault();
+      
+          // Get the values of the form inputs
+          const bookTitle = document.querySelector('#book-title').value;
+          const author = document.querySelector('#author').value;
+          const isbn = document.querySelector('#isbn').value;
+      
+          // Validate the form inputs
+          if (!bookTitle || !author || !isbn) {
+            alert('Please enter a book title, author, and ISBN');
+            return;
+          }
+      
+          // Get the book list table
+          const bookList = document.querySelector('#book-list');
+      
+          // Create a new row for the book
+          const row = document.createElement('tr');
+      
+          // Create cells for the book title, author, and ISBN
+          const bookTitleCell = document.createElement('td');
+          bookTitleCell.textContent = bookTitle;
+          const authorCell = document.createElement('td');
+          authorCell.textContent = author;
+          const isbnCell = document.createElement('td');
+          isbnCell.textContent = isbn;
+      
+          // Add the cells to the row
+          row.appendChild(bookTitleCell);
+          row.appendChild(authorCell);
+          row.appendChild(isbnCell);
+      
+          // Add the row to the book list table
+          bookList.appendChild(row);
+      
+          // Clear the form inputs
+          document.querySelector('#book-title').value = '';
+          document.querySelector('#author').value = '';
+          document.querySelector('#isbn').value = '';
+        });
+      </script>
+      
